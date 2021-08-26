@@ -3,7 +3,6 @@ package com.findeat.apirest.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +32,9 @@ public class User implements Serializable{
 	@Column(unique = true)
 	private String email;
 	
+	@Column(unique = true, name = "username")
+	private String username;
+	
 	private String name;
 	@Column(length = 60)
 	private String password;
@@ -47,6 +49,7 @@ public class User implements Serializable{
 	private String adress;
 	private String latitude;
 	private String longitude;
+	private boolean enabled;
 	@ManyToOne()
     @JoinColumn(name = "role_id")
 	private Role role;
@@ -123,22 +126,52 @@ public class User implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public Boolean getEmail_confirmed() {
+
+	public Boolean getEmailConfirmed() {
 		return emailConfirmed;
 	}
 
-	public void setEmail_confirmed(Boolean emailConfirmed) {
+	public void setEmailConfirmed(Boolean emailConfirmed) {
 		this.emailConfirmed = emailConfirmed;
 	}
 
-	public Date getCreated_at() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreated_at(Date createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+
+
 
 	private static final long serialVersionUID = 1L;
 
