@@ -18,7 +18,7 @@ import com.findeat.apirest.models.dao.IUserDAO;
 import com.findeat.apirest.models.entity.User;
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements IUserService, UserDetailsService{
 	
 	private Logger logger = LoggerFactory.getLogger(UserService.class);
 	@Autowired
@@ -38,5 +38,12 @@ public class UserService implements UserDetailsService{
 		 authorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));		
 		return new org.springframework.security.core.userdetails.User(username, user.getPassword(), user.isEnabled(), true, true, true, authorities);
 	}
+	@Override
+	public User findByUsername(String username) {
+		
+		return userDao.findByUsername(username);
+	}
+	
+	
 
 }
