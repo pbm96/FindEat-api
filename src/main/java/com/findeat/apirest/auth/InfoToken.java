@@ -25,14 +25,17 @@ public class InfoToken implements TokenEnhancer{
 		User user = userService.findByUsername(authentication.getName());
 		Map<String, Object> info = new HashMap<>();
 		
-		info.put("userName", user.getUsername());
-		info.put("adress", user.getAdress());
+		info.put("username", user.getUsername());
+		info.put("address", user.getAddress());
 		info.put("email", user.getEmail());
 		info.put("latitude", user.getLatitude());
 		info.put("longitude", user.getLongitude());
 		info.put("name", user.getName());
 		info.put("phone", user.getPhone());
 		info.put("uuid", user.getUuid());
+		info.put("createdAt", user.getCreatedAt());
+		info.put("role", user.getRole().getId());
+
 
 
 		

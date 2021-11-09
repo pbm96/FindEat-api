@@ -27,7 +27,7 @@ public class UserService implements IUserService, UserDetailsService{
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		User user = userDao.findByUsername(username);
+		User user = userDao.findByUsername(username); 
 		
 		if(user == null) {
 			logger.error("No existe el usuario en el sistema"+username);

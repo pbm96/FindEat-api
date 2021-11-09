@@ -40,8 +40,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	// aplicaciones que van a poder entrar al back
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("angularapp")
-		.secret(passwordEncode.encode("12345"))
+		clients.inMemory().withClient("findEat")
+		.secret(passwordEncode.encode("060921abC"))
 		.scopes("read","write")
 		.authorizedGrantTypes("password","refresh_token")
 		.accessTokenValiditySeconds(3600)
