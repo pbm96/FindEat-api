@@ -3,6 +3,7 @@ package com.findeat.apirest.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -25,26 +28,28 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true)
-	private String uuid;
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "uuid", columnDefinition = "VARCHAR(255)")
+	private UUID uuid;
 
-	@Column(unique = true, length = 9)
+	@Column(unique = true, length = 9, nullable = false)
 	private Integer phone;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String email;
 
-	@Column(unique = true, name = "username")
+	@Column(unique = true, name = "username", nullable = false)
 	private String username;
 
 	private String name;
-	@Column(length = 60)
+	@Column(length = 60, nullable = false)
 	private String password;
 
 	@Column(name = "email_confirmed")
 	private Boolean emailConfirmed;
 
-	@Column(name = "created_at")
+	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
@@ -55,7 +60,7 @@ public class User implements Serializable {
 	private String address;
 	private String latitude;
 	private String longitude;
-	private boolean enabled;
+	private Boolean enabled;
 	@ManyToOne()
 	@JoinColumn(name = "role_id")
 	private Role role;
@@ -68,11 +73,11 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUuid() {
+	public UUID getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(String uuid) {
+	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
 
