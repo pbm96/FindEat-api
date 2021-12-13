@@ -36,7 +36,7 @@ public class Schedule implements Serializable {
 	
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "schedule_id")
-	private Restaurant restaurant;	
+	private Business business;	
 
 	
 	public long getId() {
@@ -139,13 +139,13 @@ public class Schedule implements Serializable {
 	}
 
 
-	public Restaurant getRestaurant() {
-		return restaurant;
+	public Business getBusiness() {
+		return business;
 	}
 
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
+	public void setBusiness(Business business) {
+		this.business = business;
 	}
 
 

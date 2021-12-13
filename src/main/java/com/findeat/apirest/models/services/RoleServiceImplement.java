@@ -17,4 +17,16 @@ public class RoleServiceImplement implements IRoleService {
 		return userRole;
 	}
 
+	@Override
+	public Role getRoleBusiness() {
+		Role userRole = roleDao.findByRole("Business");
+		return userRole;
+	}
+
+	@Override
+	public Role getRoleAdmin() {
+		Role userRole = roleDao.findByRole("Admin");
+		return userRole;
+	}
+
 }

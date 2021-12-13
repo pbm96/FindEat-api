@@ -22,10 +22,10 @@ public class Category implements Serializable{
 	
 	@ManyToMany
 	@JoinTable(
-			  name = "category_restaurant", 
-			  joinColumns = @JoinColumn(name = "restaurant_id"), 
+			  name = "category_business", 
+			  joinColumns = @JoinColumn(name = "business_id"), 
 			  inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private List<Restaurant> restaurants;
+	private List<Business> business;
 	
 	private String uuid;
 	private String name;
@@ -51,6 +51,14 @@ public class Category implements Serializable{
 	}
 	
 	
+	public List<Business> getBusiness() {
+		return business;
+	}
+	public void setBusiness(List<Business> business) {
+		this.business = business;
+	}
+
+
 	private static final long serialVersionUID = 1L;
 
 

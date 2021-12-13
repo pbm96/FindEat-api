@@ -14,5 +14,11 @@ public class GenericController {
 	public Role getRoleUser() {
 		return roleService.getRoleuser();
 	}
+	public Role getRoleBusiness() {
+		return roleService.getRoleBusiness();
+	}
+	public Role getRoleAdmin() {
+		return roleService.getRoleAdmin();
+	}
 
 }

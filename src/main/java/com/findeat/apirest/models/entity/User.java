@@ -3,7 +3,6 @@ package com.findeat.apirest.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,11 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "users")
@@ -28,10 +27,8 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name = "uuid", columnDefinition = "VARCHAR(255)")
-	private UUID uuid;
+	@Column(unique = true, name = "uuid", nullable = false)
+	private String uuid;
 
 	@Column(unique = true, length = 9, nullable = false)
 	private Integer phone;
@@ -57,6 +54,10 @@ public class User implements Serializable {
 	@JoinColumn(name = "user_id")
 	private List<Rating> ratings;
 
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "business_id")
+	private Business business;
+
 	private String address;
 	private String latitude;
 	private String longitude;
@@ -73,11 +74,11 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public UUID getUuid() {
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(UUID uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 
@@ -183,6 +184,27 @@ public class User implements Serializable {
 
 	public void setRatings(List<Rating> ratings) {
 		this.ratings = ratings;
+	}
+
+	public Business getBusiness() {
+		return business;
+	}
+
+	public void setBusiness(Business business) {
+		this.business = business;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		setUuid(java.util.UUID.randomUUID().toString());
 	}
 
 	private static final long serialVersionUID = 1L;
