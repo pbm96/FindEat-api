@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity()
 @Table(name = "Business")
 public class Business implements Serializable {
@@ -32,8 +34,14 @@ public class Business implements Serializable {
 	private Schedule schedule;
 
 	@OneToOne()
+	@JsonIgnore
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@OneToOne()
+	@JsonIgnore
+	@JoinColumn(name = "menu_id")
+	private Menu menu;
 
 	@ManyToMany(mappedBy = "business")
 	List<Category> categories;
@@ -107,6 +115,14 @@ public class Business implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 
 	@PrePersist

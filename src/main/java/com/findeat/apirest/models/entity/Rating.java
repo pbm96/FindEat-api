@@ -23,16 +23,16 @@ public class Rating implements Serializable {
 	private String comment;
 	private Float score;
 
-	@Column(name = "Business_answer")
-	private String BusinessAnswer;
+	@Column(name = "business_answer")
+	private String businessAnswer;
 
 	@ManyToOne()
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	@ManyToOne()
-	@JoinColumn(name = "Business_id")
-	private Business Business;
+	@JoinColumn(name = "business_id")
+	private Business business;
 
 	public long getId() {
 		return id;
@@ -67,11 +67,11 @@ public class Rating implements Serializable {
 	}
 
 	public String getBusinessAnswer() {
-		return BusinessAnswer;
+		return businessAnswer;
 	}
 
-	public void setBusinessAnswer(String BusinessAnswer) {
-		this.BusinessAnswer = BusinessAnswer;
+	public void setBusinessAnswer(String businessAnswer) {
+		this.businessAnswer = businessAnswer;
 	}
 
 	public User getUser() {
@@ -83,11 +83,11 @@ public class Rating implements Serializable {
 	}
 
 	public Business getBusiness() {
-		return Business;
+		return business;
 	}
 
-	public void setBusiness(Business Business) {
-		this.Business = Business;
+	public void setBusiness(Business business) {
+		this.business = business;
 	}
 
 	private static final long serialVersionUID = 1L;

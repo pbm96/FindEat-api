@@ -1,22 +1,19 @@
 package com.findeat.apirest.models.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity()
-@Table(name = "Menus")
-public class Menu implements Serializable {
+@Table(name = "Plates")
+public class Plate implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +21,12 @@ public class Menu implements Serializable {
 
 	@Column(name = "name", nullable = false)
 	private String name;
+	@Column(name = "price", nullable = false)
+	private Double price;
 
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "business_id")
-	private Business business;
-
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@ManyToOne()
 	@JoinColumn(name = "menu_id")
-	private List<Plate> plates;
+	private Menu menu;
 
 	public Long getId() {
 		return id;
@@ -49,16 +44,25 @@ public class Menu implements Serializable {
 		this.name = name;
 	}
 
-	public Business getBusiness() {
-		return business;
+	public Double getPrice() {
+		return price;
 	}
 
-	public void setBusiness(Business business) {
-		this.business = business;
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5731704281066044846L;
+	private static final long serialVersionUID = 2431943517104948318L;
+
 }

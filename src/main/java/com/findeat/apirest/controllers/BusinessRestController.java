@@ -16,9 +16,9 @@ public class BusinessRestController {
 	@Autowired
 	private IBusinessService businessService;
 
-	@PostMapping("/getBusiness")
+	@PostMapping("/getBusinessByUser")
 	public Business register(@RequestBody UuidDTO peticion) {
-		return businessService.findByUuid(peticion.getUuid());
+		return businessService.findByUser(peticion.getUuid());
 	}
 
 }
