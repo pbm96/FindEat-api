@@ -22,4 +22,9 @@ public class UserRestController {
 		return userService.RegisterUser(user);
 	}
 
+	@PostMapping("/register-business")
+	public ResponseEntity<?> registerBusiness(@RequestBody User user) {
+		return userService.RegisterBusiness(user);
+	}
+
 }

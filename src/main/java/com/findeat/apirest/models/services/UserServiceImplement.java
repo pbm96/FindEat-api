@@ -89,18 +89,8 @@ public class UserServiceImplement implements IUserService, UserDetailsService {
 				user.setPassword(encodedPassword);
 				user.setCreatedAt(new Date());
 				user.setEnabled(true);
-				if (user.getLatitude() == null && user.getLongitude() == null) {
-					user.setRole(genericController.getRoleUser());
-					userRegistered = userDao.save(user);
-				} else {
-					Business businessRegister = new Business();
-					user.setRole(genericController.getRoleBusiness());
-					userRegistered = userDao.save(user);
-					businessRegister.setName(user.getName());
-					businessRegister.setOpen(true);
-					businessRegister.setUser(userRegistered);
-					businessDao.save(businessRegister);
-				}
+				user.setRole(genericController.getRoleUser());
+				userRegistered = userDao.save(user);
 
 				if (userRegistered != null)
 					response.put("messsageResponse", "Usuario registrado correctamente");
@@ -143,6 +133,48 @@ public class UserServiceImplement implements IUserService, UserDetailsService {
 		}
 
 		return response;
+	}
+
+	@Override
+	public ResponseEntity<?> RegisterBusiness(User user) {
+
+		int strength = 10;
+		User userRegistered = null;
+		Map<String, Object> response = new HashMap<>();
+		Map<String, Object> errorUser = new HashMap<>();
+
+		try {
+			errorUser = validateUserRegister(user);
+			if (errorUser.size() == 0) {
+				BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(strength, new SecureRandom());
+				String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+				user.setPassword(encodedPassword);
+				user.setCreatedAt(new Date());
+				user.setEnabled(true);
+
+				Business businessRegister = new Business();
+				user.setRole(genericController.getRoleBusiness());
+				userRegistered = userDao.save(user);
+				businessRegister.setName(user.getName());
+				businessRegister.setOpen(true);
+				businessRegister.setUser(userRegistered);
+				businessDao.save(businessRegister);
+
+				if (userRegistered != null)
+					response.put("messsageResponse", "Negocio registrado correctamente");
+			} else {
+				return new ResponseEntity<Map<String, Object>>(errorUser, HttpStatus.INTERNAL_SERVER_ERROR);
+
+			}
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+
+		} catch (DataAccessException e) {
+
+			response.put("messsageResponse", "Error al registrar nuevo usuario");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 
 }
