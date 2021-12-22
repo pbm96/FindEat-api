@@ -5,4 +5,7 @@ import com.findeat.apirest.models.entity.Business;
 public interface IBusinessService {
 
 	public Business findByUser(String uuid);
+
+	public Business findByUuid(String uuid);
+
 }

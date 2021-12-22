@@ -39,7 +39,6 @@ public class Business implements Serializable {
 	private User user;
 
 	@OneToOne()
-	@JsonIgnore
 	@JoinColumn(name = "menu_id")
 	private Menu menu;
 

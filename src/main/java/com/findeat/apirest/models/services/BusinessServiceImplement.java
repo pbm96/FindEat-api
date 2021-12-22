@@ -23,4 +23,9 @@ public class BusinessServiceImplement implements IBusinessService {
 		return businessDao.findByUser(user);
 	}
 
+	@Override
+	public Business findByUuid(String uuid) {
+		return businessDao.findByUuid(uuid);
+	}
+
 }

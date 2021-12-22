@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity()
 @Table(name = "Plates")
 public class Plate implements Serializable {
@@ -24,7 +26,11 @@ public class Plate implements Serializable {
 	@Column(name = "price", nullable = false)
 	private Double price;
 
+	@Column(name = "image")
+	private String image;
+
 	@ManyToOne()
+	@JsonIgnore()
 	@JoinColumn(name = "menu_id")
 	private Menu menu;
 
@@ -58,6 +64,14 @@ public class Plate implements Serializable {
 
 	public void setMenu(Menu menu) {
 		this.menu = menu;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	/**

@@ -8,4 +8,6 @@ import com.findeat.apirest.models.entity.User;
 public interface IBusinessDAO extends CrudRepository<Business, Long> {
 
 	public Business findByUser(User user);
+
+	public Business findByUuid(String uuid);
 }

@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity()
 @Table(name = "Menus")
 public class Menu implements Serializable {
@@ -25,6 +27,7 @@ public class Menu implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String name;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "business_id")
 	private Business business;
