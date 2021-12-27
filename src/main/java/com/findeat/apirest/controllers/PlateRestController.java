@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.findeat.apirest.dto.web.EditPlateDTO;
+import com.findeat.apirest.dto.web.idDTO;
 import com.findeat.apirest.models.services.IPlateService;
 
 @RestController
@@ -22,6 +23,11 @@ public class PlateRestController {
 	@PostMapping("/edit-plate")
 	public ResponseEntity<?> editPlate(HttpServletRequest request, @RequestBody EditPlateDTO editPlateDTO) {
 		return plateService.editPlate(editPlateDTO);
+	}
+
+	@PostMapping("/delete-plate")
+	public ResponseEntity<?> deletePlate(HttpServletRequest request, @RequestBody idDTO idDTO) {
+		return plateService.deletePlate(idDTO.getId());
 	}
 
 }

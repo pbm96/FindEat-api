@@ -16,4 +16,6 @@ public interface IPlateService {
 
 	public ResponseEntity<?> editPlate(EditPlateDTO editPlateDTO);
 
+	public ResponseEntity<?> deletePlate(Long id);
+
 }
