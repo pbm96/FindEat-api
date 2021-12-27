@@ -10,4 +10,5 @@ import com.findeat.apirest.models.entity.Plate;
 public interface IPlateDAO extends CrudRepository<Plate, Long> {
 
 	public List<Plate> findByMenu(Menu menu);
+
 }

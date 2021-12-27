@@ -26,6 +26,7 @@ public class MenuRestController {
 
 	@PostMapping("/get-menu")
 	public ResponseEntity<?> getMenu(HttpServletRequest request, @RequestBody UuidDTO uuidDto) {
-		return menuService.getMenu(uuidDto);
+		return menuService.getMenuByBusiness(uuidDto.getUuid());
 	}
+
 }

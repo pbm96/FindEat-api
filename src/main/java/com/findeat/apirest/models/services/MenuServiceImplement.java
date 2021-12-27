@@ -3,6 +3,7 @@ package com.findeat.apirest.models.services;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.findeat.apirest.dto.web.CreateMenuDTO;
 import com.findeat.apirest.dto.web.GetMenuBusinessDTO;
-import com.findeat.apirest.dto.web.UuidDTO;
 import com.findeat.apirest.models.dao.IBusinessDAO;
 import com.findeat.apirest.models.dao.IMenuDAO;
 import com.findeat.apirest.models.entity.Business;
@@ -71,13 +71,13 @@ public class MenuServiceImplement implements IMenuService {
 	}
 
 	@Override
-	public ResponseEntity<?> getMenu(UuidDTO uuid) {
+	public ResponseEntity<?> getMenuByBusiness(String uuid) {
 
 		Map<String, Object> response = new HashMap<>();
 
 		try {
 			GetMenuBusinessDTO responseMenu = new GetMenuBusinessDTO();
-			Business business = businessService.findByUuid(uuid.getUuid());
+			Business business = businessService.findByUuid(uuid);
 
 			Menu menu = menuDao.findByBusiness(business);
 			menu.setBusiness(null);
@@ -95,6 +95,15 @@ public class MenuServiceImplement implements IMenuService {
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@Override
+	public Menu getMenuById(Long id) {
+		Optional<Menu> hasMenu = menuDao.findById(id);
+		if (hasMenu.isPresent()) {
+			return hasMenu.get();
+		}
+		return null;
 	}
 
 }

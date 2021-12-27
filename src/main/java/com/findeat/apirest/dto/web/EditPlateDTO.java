@@ -2,12 +2,21 @@ package com.findeat.apirest.dto.web;
 
 import java.io.Serializable;
 
-public class PlatesResponseDTO implements Serializable {
+public class EditPlateDTO implements Serializable {
 
+	private Long idPlate;
 	private String name;
 	private Double price;
 	private String image;
-	private Long id;
+	private Long idMenu;
+
+	public Long getIdPlate() {
+		return idPlate;
+	}
+
+	public void setIdPlate(Long idPlate) {
+		this.idPlate = idPlate;
+	}
 
 	public String getName() {
 		return name;
@@ -33,17 +42,17 @@ public class PlatesResponseDTO implements Serializable {
 		this.image = image;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdMenu() {
+		return idMenu;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdMenu(Long idMenu) {
+		this.idMenu = idMenu;
 	}
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7779196254762672887L;
+	private static final long serialVersionUID = -6305518801690004496L;
 
 }
